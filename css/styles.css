@@ -25,11 +25,17 @@ header h1 {
 }
 
 textarea {
-	height: 200px !important;
+	height: 100px !important;
+	overflow: hidden;
+	resize: none;
 }
 
 svg {
 	width: 21px;
+}
+
+input[type="date"] {
+    text-transform: uppercase;
 }
 
 .title {
