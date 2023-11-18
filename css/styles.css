@@ -49,24 +49,24 @@ input[type="date"] {
 	background-color: white;
 }
 
-.list-citations .citation {
+.list-dates .date {
 	border-bottom: 1px solid #e1e1e1;
 	padding: 2rem;
 	padding-bottom: 3rem;
 }
 
-.list-citations .citation:last-of-type {
+.list-dates .date:last-of-type {
 	border-bottom: 0;
 }
 
-.list-citations .citation p {
+.list-dates .date p {
 	margin: 0;
 }
 
-.list-citations .citation button {
+.list-dates .date button {
 	margin-top: 1rem !important;
 }
 
-.list-citations .citation span {
+.list-dates .date span {
 	font-weight: bold;
 }
