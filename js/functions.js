@@ -14,6 +14,7 @@ const ui = new UI();
 const manageAppointments = new Appointments();
 
 let edit;
+let db;
 
 const dateObj = {
 	pet: '',
@@ -97,4 +98,35 @@ export function loadAppointment(appointment) {
 	form.querySelector('button[type="submit"]').textContent = 'Save changes';
 
 	edit = true;
+}
+
+export function createDatabase() {
+	const createDB = window.indexedDB.open('VAM', 1);
+
+	createDB.onerror = function () {
+		console.log('Something went wrong');
+	};
+
+	createDB.onsuccess = function () {
+		db = createDB.result;
+	};
+
+	createDB.onupgradeneeded = function (event) {
+		const db = event.target.result;
+
+		const objectStore = db.createObjectStore('appointments', {
+			keyPath: 'id',
+			autoIncrement: true,
+		});
+
+		objectStore.createIndex('pet', 'pet', { unique: false });
+		objectStore.createIndex('owner', 'owner', { unique: false });
+		objectStore.createIndex('phone', 'phone', { unique: false });
+		objectStore.createIndex('date', 'date', { unique: false });
+		objectStore.createIndex('hour', 'hour', { unique: false });
+		objectStore.createIndex('symptoms', 'symptoms', { unique: false });
+		objectStore.createIndex('id', 'id', { unique: true });
+
+		console.log('Database created and ready');
+	};
 }
