@@ -38,6 +38,62 @@ class UI {
 			divMessage.remove();
 		}, 4000);
 	}
+
+	showAppointments({ appointments }) {
+		this.clearHTML();
+
+		appointments.forEach(appointment => {
+			const { pet, owner, phone, date, hour, symptoms, id } = appointment;
+
+			const divAppointment = document.createElement('DIV');
+			divAppointment.classList.add('date', 'p-3');
+			divAppointment.dataset.id = id;
+
+			const petParagraph = document.createElement('H2');
+			petParagraph.classList.add('card-title', 'font-weight-bolder');
+			petParagraph.textContent = pet;
+
+			const ownerParagraph = document.createElement('P');
+			ownerParagraph.innerHTML = `
+				<span class="font-weight-bolder">Owner: </span> ${owner}
+			`;
+
+			const phoneParagraph = document.createElement('P');
+			phoneParagraph.innerHTML = `
+				<span class="font-weight-bolder">Phone: </span> ${phone}
+			`;
+
+			const dateParagraph = document.createElement('P');
+			dateParagraph.innerHTML = `
+				<span class="font-weight-bolder">Date: </span> ${date}
+			`;
+
+			const hourParagraph = document.createElement('P');
+			hourParagraph.innerHTML = `
+				<span class="font-weight-bolder">Hour: </span> ${hour}
+			`;
+
+			const symptomsParagraph = document.createElement('P');
+			symptomsParagraph.innerHTML = `
+				<span class="font-weight-bolder">Symptoms: </span> ${symptoms}
+			`;
+
+			divAppointment.appendChild(petParagraph);
+			divAppointment.appendChild(ownerParagraph);
+			divAppointment.appendChild(phoneParagraph);
+			divAppointment.appendChild(dateParagraph);
+			divAppointment.appendChild(hourParagraph);
+			divAppointment.appendChild(symptomsParagraph);
+
+			containerCitations.appendChild(divAppointment);
+		});
+	}
+
+	clearHTML() {
+		while (containerCitations.firstChild) {
+			containerCitations.removeChild(containerCitations.firstChild);
+		}
+	}
 }
 
 const ui = new UI();
@@ -70,20 +126,22 @@ function dataDate(event) {
 }
 
 function newDate(event) {
-    event.preventDefault();
+	event.preventDefault();
 
 	if (Object.values(dateObj).includes('')) {
 		ui.showAlert('All fields are required', 'error');
 		return;
-    }
-    
+	}
+
 	dateObj.id = Date.now();
-	
+
 	manageAppointments.addAppointment({ ...dateObj });
 
 	resetObj();
 
 	form.reset();
+
+	ui.showAppointments(manageAppointments);
 }
 
 function resetObj() {
