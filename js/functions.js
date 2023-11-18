@@ -14,7 +14,7 @@ const ui = new UI();
 const manageAppointments = new Appointments();
 
 let edit;
-let db;
+let DB;
 
 const dateObj = {
 	pet: '',
@@ -50,14 +50,21 @@ export function newDate(event) {
 
 		manageAppointments.addAppointment({ ...dateObj });
 
-		ui.showAlert('The appointment was successfully added');
+		const transaction = DB.transaction(['VAM'], 'readwrite');
+		const objectStore = transaction.objectStore('VAM');
+
+		objectStore.add(dateObj);
+
+		transaction.oncomplete = function () {
+			ui.showAlert('The appointment was successfully added');
+		};
 	}
+
+	ui.showAppointments(manageAppointments);
 
 	resetObj();
 
 	form.reset();
-
-	ui.showAppointments(manageAppointments);
 }
 
 export function resetObj() {
@@ -101,20 +108,20 @@ export function loadAppointment(appointment) {
 }
 
 export function createDatabase() {
-	const createDB = window.indexedDB.open('VAM', 1);
+	const createDB = window.indexedDB.open('VAM-DB', 1);
 
 	createDB.onerror = function () {
 		console.log('Something went wrong');
 	};
 
 	createDB.onsuccess = function () {
-		db = createDB.result;
+		DB = createDB.result;
 	};
 
 	createDB.onupgradeneeded = function (event) {
 		const db = event.target.result;
 
-		const objectStore = db.createObjectStore('appointments', {
+		const objectStore = db.createObjectStore('VAM', {
 			keyPath: 'id',
 			autoIncrement: true,
 		});
@@ -126,7 +133,5 @@ export function createDatabase() {
 		objectStore.createIndex('hour', 'hour', { unique: false });
 		objectStore.createIndex('symptoms', 'symptoms', { unique: false });
 		objectStore.createIndex('id', 'id', { unique: true });
-
-		console.log('Database created and ready');
 	};
 }
