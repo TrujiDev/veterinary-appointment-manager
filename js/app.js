@@ -15,6 +15,12 @@ class appointments {
 	addAppointment(appointment) {
 		this.appointments = [...this.appointments, appointment];
 	}
+
+	deleteAppointment(id) {
+		this.appointments = this.appointments.filter(
+			appointment => appointment.id !== id
+		);
+	}
 }
 
 class UI {
@@ -78,12 +84,19 @@ class UI {
 				<span class="font-weight-bolder">Symptoms: </span> ${symptoms}
 			`;
 
+			const btnDelete = document.createElement('BUTTON');
+			btnDelete.classList.add('btn', 'btn-danger', 'mr-2');
+			btnDelete.innerHTML =
+				'Delete <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>';
+			btnDelete.onclick = () => deleteAppointment(id);
+
 			divAppointment.appendChild(petParagraph);
 			divAppointment.appendChild(ownerParagraph);
 			divAppointment.appendChild(phoneParagraph);
 			divAppointment.appendChild(dateParagraph);
 			divAppointment.appendChild(hourParagraph);
 			divAppointment.appendChild(symptomsParagraph);
+			divAppointment.appendChild(btnDelete);
 
 			containerCitations.appendChild(divAppointment);
 		});
@@ -151,4 +164,12 @@ function resetObj() {
 	dateObj.date = '';
 	dateObj.hour = '';
 	dateObj.symptoms = '';
+}
+
+function deleteAppointment(id) {
+	manageAppointments.deleteAppointment(id);
+
+	ui.showAlert('The appointment was successfully deleted');
+
+	ui.showAppointments(manageAppointments);
 }
