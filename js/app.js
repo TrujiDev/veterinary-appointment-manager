@@ -11,6 +11,10 @@ class appointments {
 	constructor() {
 		this.appointments = [];
 	}
+
+	addAppointment(appointment) {
+		this.appointments = [...this.appointments, appointment];
+	}
 }
 
 class UI {
@@ -71,5 +75,22 @@ function newDate(event) {
 	if (Object.values(dateObj).includes('')) {
 		ui.showAlert('All fields are required', 'error');
 		return;
-	}
+    }
+    
+	dateObj.id = Date.now();
+	
+	manageAppointments.addAppointment({ ...dateObj });
+
+	resetObj();
+
+	form.reset();
+}
+
+function resetObj() {
+	dateObj.pet = '';
+	dateObj.owner = '';
+	dateObj.phone = '';
+	dateObj.date = '';
+	dateObj.hour = '';
+	dateObj.symptoms = '';
 }
