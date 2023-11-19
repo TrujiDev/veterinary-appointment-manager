@@ -3,6 +3,11 @@ import { containerCitations } from '../selectors.js';
 
 class UI {
 	showAlert(message, type) {
+		const existingAlert = document.querySelector('.alert');
+		if (existingAlert) {
+			existingAlert.remove();
+		}
+
 		const divMessage = document.createElement('DIV');
 		divMessage.classList.add('text-center', 'alert', 'd-block', 'col-12');
 
