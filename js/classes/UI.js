@@ -8,6 +8,7 @@ class UI {
 			existingAlert.remove();
 		}
 
+		// Create a new alert element and set its properties based on the specified type
 		const divMessage = document.createElement('DIV');
 		divMessage.classList.add('text-center', 'alert', 'd-block', 'col-12');
 
@@ -17,8 +18,8 @@ class UI {
 			divMessage.classList.add('alert-success');
 		}
 
+		// Set the alert's content and insert it into the DOM
 		divMessage.textContent = message;
-
 		document
 			.querySelector('#content')
 			.insertBefore(divMessage, document.querySelector('.add-date'));
@@ -28,9 +29,12 @@ class UI {
 		}, 4000);
 	}
 
+	// Method to display the list of appointments
 	showAppointments() {
+		// Clear the existing HTML content in the container
 		this.clearHTML();
 
+		// Access the object store in the database and iterate over its cursor
 		const objectStore = DB.transaction('VAM').objectStore('VAM');
 
 		objectStore.openCursor().onsuccess = function (event) {
@@ -101,6 +105,7 @@ class UI {
 		};
 	}
 
+	// Method to clear the HTML content in the container
 	clearHTML() {
 		while (containerCitations.firstChild) {
 			containerCitations.removeChild(containerCitations.firstChild);

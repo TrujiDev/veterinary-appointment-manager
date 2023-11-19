@@ -11,6 +11,7 @@ import {
 
 class App {
 	constructor() {
+		// Call the initApp() method when the class is instantiated
 		this.initApp();
 	}
 
