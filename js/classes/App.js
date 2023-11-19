@@ -1,4 +1,4 @@
-import { dataDate, newDate, createDatabase } from '../functions.js';
+import { dataDate, newDate, database } from '../functions.js';
 import {
 	petInput,
 	ownerInput,
@@ -15,7 +15,7 @@ class App {
 	}
 
 	initApp() {
-		createDatabase();
+		database();
 
 		petInput.addEventListener('input', dataDate);
 		ownerInput.addEventListener('input', dataDate);
