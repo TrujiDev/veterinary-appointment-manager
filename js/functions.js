@@ -148,7 +148,6 @@ export function resetObj() {
 	dateObj.phone = '';
 	dateObj.date = '';
 	dateObj.hour = '';
-	dateObj.symptoms = '';
 	dateObj.consultReason = '';
 	dateObj.findings = '';
 	dateObj.diagnosis = '';
