@@ -5,64 +5,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VAM</title>
+    <title>VetCare</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <h2 class="text-center my-5 title">Veterinary Appointment Manager</h2>
-    <div class="container mt-5 p-5">
+    <!-- <h2 class="text-center my-5 title">VetCare</h2> -->
+    <div class="container mt-3 p-5">
         <div id="content" class="row">
             <div class="col-md-6 add-date">
                 <form id="new-date">
-                    <legend class="mb-4">Patient Data</legend>
+                    <legend class="mb-4 text-center">Datos del Paciente</legend>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-lg-4 col-form-label">Pet Name:</label>
+                        <label class="col-sm-4 col-lg-4 col-form-label">Nombre del Peludito/a:</label>
                         <div class="col-sm-8 col-lg-8">
                             <input type="text" id="pet" name="pet" class="form-control" placeholder="Pet name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-lg-4 col-form-label">Owner:</label>
+                        <label class="col-sm-4 col-lg-4 col-form-label">Responsable:</label>
                         <div class="col-sm-8 col-lg-8">
                             <input type="text" id="owner" name="owner" class="form-control"
                                 placeholder="Pet owner's name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-lg-4 col-form-label">Phone:</label>
+                        <label class="col-sm-4 col-lg-4 col-form-label">Teléfono:</label>
                         <div class="col-sm-8 col-lg-8">
                             <input type="tel" id="phone" name="phone" class="form-control" placeholder="Phone number">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 col-lg-4 col-form-label">Date:</label>
+                        <label class="col-sm-4 col-lg-4 col-form-label">Fecha:</label>
                         <div class="col-sm-8 col-lg-8">
                             <input type="date" id="date" name="date" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-4 col-lg-4 col-form-label">Time:</label>
+                        <label class="col-sm-4 col-lg-4 col-form-label">Hora:</label>
                         <div class="col-sm-8 col-lg-8">
                             <input type="time" id="hour" name="hour" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-4 col-lg-4 col-form-label">Symptoms:</label>
+                        <label class="col-sm-4 col-lg-4 col-form-label">Motivo de la Consulta:</label>
                         <div class="col-sm-8 col-lg-8">
-                            <textarea id="symptoms" name="symptoms" class="form-control"></textarea>
+                            <textarea id="consultReason" name="consultReason" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Hallazgos de consulta:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <textarea id="findings" name="findings" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Diagnóstico Médico:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <textarea id="diagnosis" name="diagnosis" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-lg-4 col-form-label">Plan de Tratamiento:</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <textarea id="treatment" name="treatment" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success w-100 d-block">Create appointment</button>
+                        <button type="submit" class="btn btn-success w-100 d-block">Programar Cita</button>
                     </div>
                 </form>
             </div>
             <div class="col-md-6">
-                <h2 class="mb-4">Manage your appointments</h2>
+                <h2 class="mb-4 text-center">Citas programadas</h2>
                 <ul id="appointments" class="list-group list-dates"></ul>
             </div>
         </div> <!--.row-->
