@@ -7,7 +7,10 @@ import {
 	phoneInput,
 	dateInput,
 	hourInput,
-	symptomsInput,
+	consultReasonInput,
+	findingsInput,
+	diagnosisInput,
+	treatmentInput,
 } from './selectors.js';
 
 const ui = new UI();
@@ -58,7 +61,10 @@ function createDatabase() {
 		objectStore.createIndex('PHONE', 'phone', { unique: false });
 		objectStore.createIndex('DATE', 'date', { unique: false });
 		objectStore.createIndex('HOUR', 'hour', { unique: false });
-		objectStore.createIndex('SYMPTOMS', 'symptoms', { unique: false });
+		objectStore.createIndex('CONSULT_REASON', 'consultReason', { unique: false });
+		objectStore.createIndex('FINDINGS', 'findings', { unique: false });
+		objectStore.createIndex('DIAGNOSIS', 'diagnosis', { unique: false });
+		objectStore.createIndex('TREATMENT', 'treatment', { unique: false });
 		objectStore.createIndex('ID', 'id', { unique: true });
 	};
 }
@@ -70,7 +76,10 @@ const dateObj = {
 	phone: '',
 	date: '',
 	hour: '',
-	symptoms: '',
+	consultReason: '',
+	findings: '',
+	diagnosis: '',
+	treatment: '',
 };
 
 // Function to update dateObj based on input events
@@ -84,7 +93,7 @@ export function newDate(event) {
 
 	// Check if any required fields are empty
 	if (Object.values(dateObj).includes('')) {
-		ui.showAlert('All fields are required', 'error');
+		ui.showAlert('Es necesario completar todos los campos', 'error');
 		return;
 	}
 
@@ -100,10 +109,10 @@ export function newDate(event) {
 
 		// Handle completion of the transaction
 		transaction.oncomplete = () => {
-			ui.showAlert('Successfully edited');
+			ui.showAlert('Editado con éxito');
 
 			// Reset the form button text and editing flag
-			form.querySelector('button[type="submit"]').textContent = 'Create date';
+			form.querySelector('button[type="submit"]').textContent = 'Crear cita';
 			edit = false;
 		};
 	} else {
@@ -120,7 +129,7 @@ export function newDate(event) {
 
 		// Handle completion of the transaction
 		transaction.oncomplete = function () {
-			ui.showAlert('Successfully added');
+			ui.showAlert('Añadido con éxito');
 		};
 	}
 
@@ -140,6 +149,10 @@ export function resetObj() {
 	dateObj.date = '';
 	dateObj.hour = '';
 	dateObj.symptoms = '';
+	dateObj.consultReason = '';
+	dateObj.findings = '';
+	dateObj.diagnosis = '';
+	dateObj.treatment = '';
 }
 
 // Function to delete an appointment by ID
@@ -151,25 +164,28 @@ export function deleteAppointment(id) {
 	// Handle completion of the transaction
 	transaction.oncomplete = () => {
 		ui.showAppointments();
-		ui.showAlert('Successfully deleted');
+		ui.showAlert('Eliminado con éxito');
 	};
 
 	// Handle errors during the transaction
 	transaction.onerror = () => {
-		ui.showAlert('There was an error deleting the appointment', 'error');
+		ui.showAlert('Ha ocurrido un error al intentar eliminar la cita', 'error');
 	};
 }
 
 // Function to load appointment data into the form for editing
 export function loadAppointment(appointment) {
-	const { pet, owner, phone, date, hour, symptoms, id } = appointment;
+	const { pet, owner, phone, date, hour, id, consultReason, treatment, findings, diagnosis } = appointment;
 
 	petInput.value = pet;
 	ownerInput.value = owner;
 	phoneInput.value = phone;
 	dateInput.value = date;
 	hourInput.value = hour;
-	symptomsInput.value = symptoms;
+	consultReasonInput.value = consultReason;
+	findingsInput.value = findings;
+	diagnosisInput.value = diagnosis;
+	treatmentInput.value = treatment;
 
 	// Update dateObj with the loaded appointment data
 	dateObj.pet = pet;
@@ -177,10 +193,13 @@ export function loadAppointment(appointment) {
 	dateObj.phone = phone;
 	dateObj.date = date;
 	dateObj.hour = hour;
-	dateObj.symptoms = symptoms;
+	dateObj.consultReason = consultReason;
+	dateObj.findings = findings;
+	dateObj.diagnosis = diagnosis;
+	dateObj.treatment = treatment;
 	dateObj.id = id;
 
 	// Change the form button text and set the editing flag
-	form.querySelector('button[type="submit"]').textContent = 'Save changes';
+	form.querySelector('button[type="submit"]').textContent = 'Guardar cambios';
 	edit = true;
 }
