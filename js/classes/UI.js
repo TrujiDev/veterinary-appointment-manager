@@ -41,7 +41,7 @@ class UI {
 			const cursor = event.target.result;
 
 			if (cursor) {
-				const { pet, owner, phone, date, hour, symptoms, id } = cursor.value;
+				const { pet, owner, phone, date, hour, consultReason, findings, diagnosis, treatment, id } = cursor.value;
 
 				const divAppointment = document.createElement('DIV');
 				divAppointment.classList.add('date', 'p-3');
@@ -53,38 +53,53 @@ class UI {
 
 				const ownerParagraph = document.createElement('P');
 				ownerParagraph.innerHTML = `
-				<span class="font-weight-bolder">Owner: </span> ${owner}
+				<span class="font-weight-bolder">Responsable: </span> ${owner}
 			`;
 
 				const phoneParagraph = document.createElement('P');
 				phoneParagraph.innerHTML = `
-				<span class="font-weight-bolder">Phone: </span> ${phone}
+				<span class="font-weight-bolder">Teléfono: </span> ${phone}
 			`;
 
 				const dateParagraph = document.createElement('P');
 				dateParagraph.innerHTML = `
-				<span class="font-weight-bolder">Date: </span> ${date}
+				<span class="font-weight-bolder">Fecha: </span> ${date}
 			`;
 
 				const hourParagraph = document.createElement('P');
 				hourParagraph.innerHTML = `
-				<span class="font-weight-bolder">Hour: </span> ${hour}
+				<span class="font-weight-bolder">Hora: </span> ${hour}
 			`;
 
-				const symptomsParagraph = document.createElement('P');
-				symptomsParagraph.innerHTML = `
-				<span class="font-weight-bolder">Symptoms: </span> ${symptoms}
+				const consultReasonParagraph = document.createElement('P');
+				consultReasonParagraph.innerHTML = `
+				<span class="font-weight-bolder">Motivo de la Consulta: </span> ${consultReason}
+			`;
+
+				const findingsParagraph = document.createElement('P');
+				findingsParagraph.innerHTML = `
+				<span class="font-weight-bolder">Hallazgos de consulta: </span> ${findings}
+			`;
+
+				const diagnosisParagraph = document.createElement('P');
+				diagnosisParagraph.innerHTML = `
+				<span class="font-weight-bolder">Diagnóstico Médico: </span> ${diagnosis}
+			`;
+
+				const treatmentParagraph = document.createElement('P');
+				treatmentParagraph.innerHTML = `
+				<span class="font-weight-bolder">Plan de Tratamiento: </span> ${treatment}
 			`;
 
 				const btnDelete = document.createElement('BUTTON');
 				btnDelete.classList.add('btn', 'btn-danger', 'mr-2');
 				btnDelete.innerHTML =
-					'Delete <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>';
+					'Eliminar <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>';
 				btnDelete.onclick = () => deleteAppointment(id);
 
 				const btnEdit = document.createElement('BUTTON');
 				btnEdit.classList.add('btn', 'btn-info');
-				btnEdit.innerHTML = `Edit <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+				btnEdit.innerHTML = `Editar <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
 				</svg>`;
 				btnEdit.onclick = () => loadAppointment(cursor.value);
@@ -94,7 +109,10 @@ class UI {
 				divAppointment.appendChild(phoneParagraph);
 				divAppointment.appendChild(dateParagraph);
 				divAppointment.appendChild(hourParagraph);
-				divAppointment.appendChild(symptomsParagraph);
+				divAppointment.appendChild(consultReasonParagraph);
+				divAppointment.appendChild(findingsParagraph);
+				divAppointment.appendChild(diagnosisParagraph);
+				divAppointment.appendChild(treatmentParagraph);
 				divAppointment.appendChild(btnDelete);
 				divAppointment.appendChild(btnEdit);
 
