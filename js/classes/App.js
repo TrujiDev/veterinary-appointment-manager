@@ -5,7 +5,10 @@ import {
 	phoneInput,
 	dateInput,
 	hourInput,
-	symptomsInput,
+	consultReasonInput,
+	findingsInput,
+	diagnosisInput,
+	treatmentInput,
 	form,
 } from '../selectors.js';
 
@@ -23,7 +26,10 @@ class App {
 		phoneInput.addEventListener('input', dataDate);
 		dateInput.addEventListener('input', dataDate);
 		hourInput.addEventListener('input', dataDate);
-		symptomsInput.addEventListener('input', dataDate);
+		consultReasonInput.addEventListener('input', dataDate);
+		findingsInput.addEventListener('input', dataDate);
+		diagnosisInput.addEventListener('input', dataDate);
+		treatmentInput.addEventListener('input', dataDate);
 
 		form.addEventListener('submit', newDate);
 	}
