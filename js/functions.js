@@ -164,6 +164,13 @@ export function deleteAppointment(id) {
 	transaction.oncomplete = () => {
 		ui.showAppointments();
 		ui.showAlert('Eliminado con éxito');
+
+		if (edit && dateObj.id === id) {
+			form.querySelector('button[type="submit"]').textContent = 'Crear cita';
+			form.reset();
+			resetObj();
+			edit = false;
+		}
 	};
 
 	// Handle errors during the transaction
